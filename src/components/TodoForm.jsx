@@ -11,6 +11,7 @@ function TodoForm({onSubmit}) {
       task: input,
       completed: false
     })
+    setInput('')
   }
 
   const handleChange = (e) => {

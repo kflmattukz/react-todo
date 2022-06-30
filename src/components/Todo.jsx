@@ -12,7 +12,7 @@ function Todo() {
     {
       id: 2,
       task: "Learn react",
-      completed: false
+      completed: true
     },
     {
       id: 3,
@@ -34,7 +34,11 @@ function Todo() {
     setTodos(newTodos)
   }
 
-  const todoList = todos.map((todo) => <TodoList key={todo.id} todo={todo} handleRemove={handleRemove} />)
+  const removeTodo = (todoid) => {
+    setTodos(todos.filter(todo => todo.id !== todoid))
+  }
+
+  const todoList = todos.map((todo) => <TodoList key={todo.id} todo={todo} removeTodo={removeTodo} />)
 
   return (
     <div className='w-1/3 mx-auto mt-5'>
