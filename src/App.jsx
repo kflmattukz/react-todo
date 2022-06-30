@@ -4,7 +4,7 @@ function App() {
   
 
   return (
-    <div className="App w-1/3 mx-auto">
+    <div>
       <Todo/>
     </div>
   )
