@@ -1,67 +1,66 @@
-import React, { useState } from 'react'
-import TodoForm from './TodoForm'
-import TodoList from './TodoList'
+import React, { useState } from "react";
+import TodoForm from "./TodoForm";
+import TodoList from "./TodoList";
 
 function Todo() {
   let dataTodos = [
     {
       id: 1,
       task: "Walk the cat",
-      completed: false
+      completed: false,
     },
     {
       id: 2,
       task: "Learn react",
-      completed: true
+      completed: true,
     },
     {
       id: 3,
       task: "Learn Express js make an API",
-      completed: false
-    }
-  ]
+      completed: false,
+    },
+  ];
 
-  let [todos, setTodos] = useState(dataTodos)
-
-  const handleRemove = (e,id) => {
-    // console.log(e.target)
-    // console.log(id)
-    setTodos(todos.filter(todo => todo.id !== id))
-  }
+  let [todos, setTodos] = useState(dataTodos);
 
   const addTodo = (todo) => {
-    const newTodos = [todo, ...todos]
-    setTodos(newTodos)
-  }
+    const newTodos = [todo, ...todos];
+    setTodos(newTodos);
+  };
 
   const removeTodo = (todoid) => {
-    setTodos(todos.filter(todo => todo.id !== todoid))
-  }
+    setTodos(todos.filter((todo) => todo.id !== todoid));
+  };
 
   const toggleComplete = (todoid) => {
-    const updateTodo = todos.map(todo => {
+    const updateTodo = todos.map((todo) => {
       if (todo.id === todoid) {
-        todo.completed = !todo.completed
+        todo.completed = !todo.completed;
       }
-      return todo
-    })
-    setTodos(updateTodo)
-  }
+      return todo;
+    });
+    setTodos(updateTodo);
+  };
 
-  const todoList = todos.map((todo) => <TodoList key={todo.id} todo={todo} removeTodo={removeTodo} toggleComplete={toggleComplete} />)
+  const todoList = todos.map((todo) => (
+    <TodoList
+      key={todo.id}
+      todo={todo}
+      removeTodo={removeTodo}
+      toggleComplete={toggleComplete}
+    />
+  ));
 
   return (
-    <div className='w-1/3 mx-auto mt-5'>
-      <header className='text-center'>
-        <h2 className='text-4xl font-thin text-gray-600'>Todo App</h2>
-        <p className='text-xl font-semibold text-gray-700'>Manage your todo</p>
+    <div className="w-1/3 mx-auto mt-5">
+      <header className="text-center">
+        <h2 className="text-4xl font-thin text-gray-600">Todo App</h2>
+        <p className="text-xl font-semibold text-gray-700">Manage your todo</p>
       </header>
-      <TodoForm onSubmit={addTodo}  />
-      <div className='mt-5 flex flex-col gap-2'>
-      {todoList}
-      </div>
+      <TodoForm onSubmit={addTodo} />
+      <div className="mt-5 flex flex-col gap-1">{todoList}</div>
     </div>
-  )
+  );
 }
 
-export default Todo
+export default Todo;
