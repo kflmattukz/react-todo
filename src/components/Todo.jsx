@@ -38,7 +38,17 @@ function Todo() {
     setTodos(todos.filter(todo => todo.id !== todoid))
   }
 
-  const todoList = todos.map((todo) => <TodoList key={todo.id} todo={todo} removeTodo={removeTodo} />)
+  const toggleComplete = (todoid) => {
+    const updateTodo = todos.map(todo => {
+      if (todo.id === todoid) {
+        todo.completed = !todo.completed
+      }
+      return todo
+    })
+    setTodos(updateTodo)
+  }
+
+  const todoList = todos.map((todo) => <TodoList key={todo.id} todo={todo} removeTodo={removeTodo} toggleComplete={toggleComplete} />)
 
   return (
     <div className='w-1/3 mx-auto mt-5'>
@@ -47,7 +57,9 @@ function Todo() {
         <p className='text-xl font-semibold text-gray-700'>Manage your todo</p>
       </header>
       <TodoForm onSubmit={addTodo}  />
+      <div className='mt-5 flex flex-col gap-2'>
       {todoList}
+      </div>
     </div>
   )
 }
