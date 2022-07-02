@@ -42,12 +42,17 @@ function Todo() {
     setTodos(updateTodo);
   };
 
+  const todoEdit = (id, todo) => {
+    console.log('edit')
+  }
+
   const todoList = todos.map((todo) => (
     <TodoList
       key={todo.id}
       todo={todo}
       removeTodo={removeTodo}
       toggleComplete={toggleComplete}
+      todoEdit={todoEdit}
     />
   ));
 
