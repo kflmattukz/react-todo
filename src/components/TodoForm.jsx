@@ -1,47 +1,54 @@
-import React, { useState } from "react";
-import { AiOutlinePlus } from "react-icons/ai";
+import React ,{useState}from 'react'
 
-function TodoForm({onSubmit}) {
-  const [input,setInput] = useState('')
-  
-  const handleSubmit = (e) => {
+function TodoForm({onSubmit,edit}) {
+  const [input, setInput] = useState(edit ? edit.task : '');
+
+  const handleSubmit = e => {
     e.preventDefault()
     onSubmit({
-      id: Math.floor(Math.random() * 10000),
-      task: input,
+      id: Math.floor(Math.random() * 1000),
+      task:input,
       completed: false
     })
+
     setInput('')
   }
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setInput(e.target.value)
-    console.log(e.target.value)
   }
 
-  
   return (
-    <div className="mt-5">
-      <form
-        action=""
-        method="posh"
-        className="flex border border-blue-600 rounded-sm overflow-hidden shadow-md group-focus:ring ring-blue-700-20"
-        onSubmit={handleSubmit}
-      >
-        <input
-          className="group px-3 py-2 outline-none flex-auto text-gray-700"
-          type="text"
-          value={input}
-          name="todoinput"
-          placeholder="Input todo" 
-          onChange={handleChange} 
-        />
-        <button className="px-3 py-2 bg-blue-600 text-gray-100 hover:bg-blue-700 duration-300">
-          <AiOutlinePlus size={25} />
-        </button>
+    <>
+      <form onSubmit={handleSubmit} className="flex items-center border border-blue-500 rounded-md overflow-hidden shadow-md">
+        { edit ? (
+          <>
+            <input 
+            type="text" 
+            name="task" 
+            value={input}
+            onChange={handleChange}
+            className="flex-1 px-3 py-2 outline-none"
+            />
+            <button className="px-3 py-3 text-sm font-semibold bg-blue-700 text-gray-100">Update Task</button>
+          </>
+        ) : (
+          <>
+            <input 
+            type="text" 
+            name="task" 
+            value={input}
+            onChange={handleChange}
+            className="flex-1 px-3 py-2 outline-none"
+            />
+          <button className="px-3 py-3 text-sm font-semibold bg-blue-700 text-gray-100">Add Task</button>
+          </>
+        )
+          
+        }
       </form>
-    </div>
-  );
+    </>
+  )
 }
 
-export default TodoForm;
+export default TodoForm

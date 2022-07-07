@@ -1,42 +1,38 @@
-import React, { useState } from "react";
-import TodoForm from "./TodoForm";
-import { AiOutlineCheck } from "react-icons/ai";
-import { FaTimes } from "react-icons/fa";
+import React ,{useState} from 'react'
+import {TiEdit ,TiTimes} from 'react-icons/ti'
+import TodoForm from './TodoForm'
 
-function TodoList(props) {
-  const [isEdit , setIsEdit] = useState(false)
-  const { task, completed, id } = props.todo
-  const { removeTodo, toggleComplete, todoEdit } = props
+function TodoList({todo,toggleComplete,toggleRemove,toggleUpdate}) {
+  const [edit , setEdit] = useState({
+    id: null,
+    task: '',
+    completed: false
+  })
 
-  const handleRemove = (id) => {
-    removeTodo(id)
-  };
+  const {id , task , completed} = todo
 
-  const handleToggleComplete = (id) => {
-    toggleComplete(id)
-  };
+  const updateTodo = (newTask) => {
+    toggleUpdate(edit.id , newTask)
+    setEdit({
+      id: null,
+      task: '',
+      completed: false
+    })
+  }
 
-  const handleEdit = (todo) => {
-    setIsEdit( prevIsEdit => !isEdit)
+  if (edit.id) {
+    return <TodoForm edit={edit} onSubmit={updateTodo} autoFocus={true} />
   }
 
   return (
-    <>
-      { isEdit ? <TodoForm /> : <div
-      className={`flex bg-white shadow-sm border items-center border-gray-300 rounded-sm text-gray-800 font-medium ${
-        completed ? "opacity-80 line-through" : ""
-      }`}
-    >
-      <p className="flex-auto pl-3 text-gray-600" onDoubleClick={() => handleEdit(props.todo)}>{task}</p>
-      <button className="p-2" onClick={() => handleToggleComplete(id)}>
-        <AiOutlineCheck size={20} className="pointer-events-none" />
-      </button>
-      <button className="p-2" onClick={() => handleRemove(id)}>
-        <FaTimes size={20} className="pointer-events-none" />
-      </button>
-    </div>}
-    </>
-  );
+    <div className={`flex ${completed ? 'opacity-80 line-through' : 'shadow-md p-2 items-center bg-white rounded-md border border-gray-300'} `} onDoubleClick={() => toggleComplete(id)} >
+      <p className='flex-1 font-semibold text-gray-700 text-md'>{task}</p>
+      <div className="action flex text-gray-700 gap-3 items-center">
+        <TiTimes onClick={() => toggleRemove(id)} size={23} />
+        <TiEdit onClick={() => setEdit({id: id , task: task, completed: completed})} size={20} />
+      </div>
+    </div>
+  )
 }
 
-export default TodoList;
+export default TodoList

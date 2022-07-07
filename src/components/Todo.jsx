@@ -1,71 +1,65 @@
-import React, { useState } from "react";
-import TodoForm from "./TodoForm";
-import TodoList from "./TodoList";
+import React,{useState} from 'react'
+import TodoForm from './TodoForm'
+import TodoList from './TodoList'
 
 function Todo() {
-  let dataTodos = [
-    {
-      id: 1,
-      task: "Walk the cat",
-      completed: false,
-    },
-    {
-      id: 2,
-      task: "Learn react",
-      completed: true,
-    },
-    {
-      id: 3,
-      task: "Learn Express js make an API",
-      completed: false,
-    },
-  ];
 
-  let [todos, setTodos] = useState(dataTodos);
+  const [todos , setTodos] = useState([])
 
   const addTodo = (todo) => {
-    const newTodos = [todo, ...todos];
-    setTodos(newTodos);
-  };
+    // if (!todo.task && /^\s*$/.test()) {
+    //   return
+    // }
 
-  const removeTodo = (todoid) => {
-    setTodos(todos.filter((todo) => todo.id !== todoid));
-  };
-
-  const toggleComplete = (todoid) => {
-    const updateTodo = todos.map((todo) => {
-      if (todo.id === todoid) {
-        todo.completed = !todo.completed;
-      }
-      return todo;
-    });
-    setTodos(updateTodo);
-  };
-
-  const todoEdit = (id, todo) => {
-    console.log('edit')
+    setTodos(prevTodo => [todo, ...prevTodo])
+    // console.log(todos);
   }
 
-  const todoList = todos.map((todo) => (
-    <TodoList
+  const completeTodo = todoId => {
+    const updateTodo = todos.map((todo) => {
+      if (todo.id === todoId) {
+        todo.completed = !todo.completed
+      }
+      return todo
+    })
+    setTodos(updateTodo)
+  }
+
+  const updateTodo = (todoId , newTask) => {
+    setTodos(prevTodos => prevTodos.map(todo => {
+      if (todo.id === todoId) {
+        return newTask
+      }
+      return todo
+    }))
+  }
+
+  const removeTodo = todoId => {
+    setTodos(prevTodos => prevTodos.filter(todo => todo.id !== todoId))
+  }
+
+  const todosList = todos.map(todo => {
+    return <TodoList
       key={todo.id}
       todo={todo}
-      removeTodo={removeTodo}
-      toggleComplete={toggleComplete}
-      todoEdit={todoEdit}
+      toggleComplete={completeTodo}
+      toggleRemove={removeTodo}
+      toggleUpdate={updateTodo}
     />
-  ));
+  })
 
   return (
-    <div className="w-1/3 mx-auto mt-5">
-      <header className="text-center">
-        <h2 className="text-4xl font-thin text-gray-600">Todo App</h2>
-        <p className="text-xl font-semibold text-gray-700">Manage your todo</p>
+    <div className='flex flex-col gap-5 w-1/3 mx-auto'>
+      <header className='text-center'>
+        <h2 className='text-4xl font-thin text-gray-600'>Simple Todo App</h2>
+        <p className='text-xl font-semibold text-gray-600'>Manage your todos here</p>
       </header>
-      <TodoForm onSubmit={addTodo} />
-      <div className="mt-5 flex flex-col gap-1">{todoList}</div>
+      <TodoForm onSubmit={addTodo}/>
+      <div className='flex flex-col gap-1'>
+        {todos.length > 0 && todosList}
+      </div>
     </div>
-  );
+  )
 }
 
-export default Todo;
+export default Todo
