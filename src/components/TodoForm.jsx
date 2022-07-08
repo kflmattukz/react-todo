@@ -6,7 +6,7 @@ function TodoForm({onSubmit,edit}) {
   const handleSubmit = e => {
     e.preventDefault()
     onSubmit({
-      id: Math.floor(Math.random() * 1000),
+      id: edit ? edit.id : Math.floor(Math.random() * 1000),
       task:input,
       completed: false
     })

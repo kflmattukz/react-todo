@@ -25,7 +25,7 @@ function TodoList({todo,toggleComplete,toggleRemove,toggleUpdate}) {
   }
 
   return (
-    <div className={`flex ${completed ? 'opacity-80 line-through' : 'shadow-md p-2 items-center bg-white rounded-md border border-gray-300'} `} onDoubleClick={() => toggleComplete(id)} >
+    <div className={`flex ${completed ? 'opacity-50 line-through' : ''} shadow-md p-2 items-center bg-white rounded-md border border-gray-300`} onDoubleClick={() => toggleComplete(id)} >
       <p className='flex-1 font-semibold text-gray-700 text-md'>{task}</p>
       <div className="action flex text-gray-700 gap-3 items-center">
         <TiTimes onClick={() => toggleRemove(id)} size={23} />

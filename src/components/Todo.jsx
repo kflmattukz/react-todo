@@ -1,17 +1,47 @@
-import React,{useState} from 'react'
+import React,{useState , useEffect } from 'react'
 import TodoForm from './TodoForm'
+import TodoInfo from './TodoInfo'
 import TodoList from './TodoList'
 
 function Todo() {
 
+  const data = {
+    getId(id) {
+      return localStorage.key(id)
+    },
+    store(id, content) {
+      localStorage.setItem(id, JSON.stringify(content), null, 4)
+    },
+    getByIndex(index) {
+      return JSON.parse(localStorage.getItem(this.getId(index)))
+    },
+    getById(id) {
+      return JSON.parse(localStorage.getItem(id))
+    },
+    remove(id) {
+      localStorage.removeItem(id)
+    },
+  }
+
   const [todos , setTodos] = useState([])
 
+  // useEffect(() => {
+  //   let updateTodo = []
+  //   for (let i = 0 ; i < localStorange.length ; i++) {
+  //     const todo = data.getByIndex(i);
+  //     updateTodo.push(todo)
+  //   }
+  //   console.log(updateTodo)
+  //   setTodos(prevTodos => [...updateTodo, ...prevTodos])
+  // })
+
   const addTodo = (todo) => {
-    // if (!todo.task && /^\s*$/.test()) {
-    //   return
-    // }
+    if (!todo.task && /^\s*$/.test(todo.task)) {
+      return
+    }
 
     setTodos(prevTodo => [todo, ...prevTodo])
+    // data.store(todo.id , todo)
     // console.log(todos);
   }
 
@@ -20,6 +50,7 @@ function Todo() {
       if (todo.id === todoId) {
         todo.completed = !todo.completed
       }
+      // data.store(todo.id , todo)
       return todo
     })
     setTodos(updateTodo)
@@ -32,10 +63,12 @@ function Todo() {
       }
       return todo
     }))
+    // data.store(todoId, newTask)
   }
 
   const removeTodo = todoId => {
     setTodos(prevTodos => prevTodos.filter(todo => todo.id !== todoId))
+    // data.remove(todoId)
   }
 
   const todosList = todos.map(todo => {
@@ -58,6 +91,7 @@ function Todo() {
       <div className='flex flex-col gap-1'>
         {todos.length > 0 && todosList}
       </div>
+      <TodoInfo todos={todos} />
     </div>
   )
 }
