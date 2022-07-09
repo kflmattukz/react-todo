@@ -1,39 +1,53 @@
-import React,{useState , useEffect } from 'react'
+import React,{useState,useEffect} from 'react'
 import TodoForm from './TodoForm'
 import TodoInfo from './TodoInfo'
 import TodoList from './TodoList'
 
 function Todo() {
 
-  const data = {
-    getId(id) {
-      return localStorage.key(id)
-    },
-    store(id, content) {
-      localStorage.setItem(id, JSON.stringify(content), null, 4)
-    },
-    getByIndex(index) {
-      return JSON.parse(localStorage.getItem(this.getId(index)))
-    },
-    getById(id) {
-      return JSON.parse(localStorage.getItem(id))
-    },
-    remove(id) {
-      localStorage.removeItem(id)
-    },
-  }
+  // const data = {
+  //   getId(id) {
+  //     return localStorage.key(id)
+  //   },
+  //   store(id, content) {
+  //     localStorage.setItem(id, JSON.stringify(content), null, 4)
+  //   },
+  //   getByIndex(index) {
+  //     return JSON.parse(localStorage.getItem(this.getId(index)))
+  //   },
+  //   getById(id) {
+  //     return JSON.parse(localStorage.getItem(id))
+  //   },
+  //   remove(id) {
+  //     localStorage.removeItem(id)
+  //   },
+  // }
 
   const [todos , setTodos] = useState([])
 
   // useEffect(() => {
+  //   if (localStorage.length === 0) {
+  //     return
+  //   }
+  //   for (let i = 0 ; i < localStorage.length ; i++) {
+  //       todos.push(data.getByIndex(i))
+  //     console.log(localStorage)
+  //   }
+  //   return updateTodo
+  // },[])
+
+  // function loadTodo () {
   //   let updateTodo = []
-  //   for (let i = 0 ; i < localStorange.length ; i++) {
+  //   for (let i = 0 ; i < localStorage.length ; i++) {
   //     const todo = data.getByIndex(i);
   //     updateTodo.push(todo)
   //   }
-  //   console.log(updateTodo)
-  //   setTodos(prevTodos => [...updateTodo, ...prevTodos])
-  // })
+  //   // console.log(updateTodo)
+  //   setTodos(updateTodo)
+  // }
+  // loadTodo()
+
+
 
   const addTodo = (todo) => {
     if (!todo.task && /^\s*$/.test(todo.task)) {
