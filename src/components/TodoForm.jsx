@@ -1,6 +1,6 @@
 import React ,{useState}from 'react'
 
-function TodoForm({onSubmit,edit}) {
+export default function TodoForm({onSubmit,edit}) {
   const [input, setInput] = useState(edit ? edit.task : '');
 
   const handleSubmit = e => {
@@ -29,6 +29,7 @@ function TodoForm({onSubmit,edit}) {
             value={input}
             onChange={handleChange}
             className="flex-1 px-3 py-2 outline-none"
+            autoComplete='off'
             />
             <button className="px-3 py-3 text-sm font-semibold bg-blue-700 text-gray-100">Update Task</button>
           </>
@@ -50,5 +51,3 @@ function TodoForm({onSubmit,edit}) {
     </>
   )
 }
-
-export default TodoForm

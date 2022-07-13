@@ -2,7 +2,7 @@ import React ,{useState} from 'react'
 import {TiEdit ,TiTimes} from 'react-icons/ti'
 import TodoForm from './TodoForm'
 
-function TodoList({todo,toggleComplete,toggleRemove,toggleUpdate}) {
+export default function TodoList({todo,toggleComplete,toggleRemove,toggleUpdate}) {
   const [edit , setEdit] = useState({
     id: null,
     task: '',
@@ -34,5 +34,3 @@ function TodoList({todo,toggleComplete,toggleRemove,toggleUpdate}) {
     </div>
   )
 }
-
-export default TodoList

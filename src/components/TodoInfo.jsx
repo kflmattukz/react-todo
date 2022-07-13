@@ -1,6 +1,6 @@
 import React from 'react'
 
-function TodoInfo({todos}) {
+export default function TodoInfo({todos}) {
 
   return (
     <div className='p-3 flex items-center justify-between bg-white shadow rounded-md capitalize font-semibold text-gray-600'>
@@ -10,5 +10,3 @@ function TodoInfo({todos}) {
     </div>
   )
 }
-
-export default TodoInfo
