@@ -3,13 +3,7 @@ import TodoForm from './TodoForm'
 import TodoInfo from './TodoInfo'
 import TodoList from './TodoList'
 
-<<<<<<< HEAD
 export default function Todo() {
-=======
-function Todo() {
-
-
->>>>>>> c9fc58c4d305a70d1468109f42623ffe2ca976d1
   const [todos , setTodos] = useState([])
 
   const addTodo = (todo) => {

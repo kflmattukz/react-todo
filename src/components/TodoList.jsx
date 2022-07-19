@@ -25,11 +25,11 @@ export default function TodoList({todo,toggleComplete,toggleRemove,toggleUpdate}
   }
 
   return (
-    <div className={`flex ${completed ? 'opacity-50 line-through' : ''} shadow-md p-2 items-center bg-white rounded-md border border-gray-300`} onDoubleClick={() => toggleComplete(id)} >
-      <p className='flex-1 font-semibold text-gray-700 text-md truncate'>{task}</p>
+    <div className={`flex ${completed ? 'opacity-50 line-through' : ''} shadow-md p-3 items-center bg-white rounded-md border border-gray-300`} onDoubleClick={() => toggleComplete(id)} >
+      <p className='flex-1 font-semibold text-gray-600 text-md truncate'>{task}</p>
       <div className="action flex text-gray-700 gap-3 items-center">
-        <TiTimes onClick={() => toggleRemove(id)} size={23} />
-        <TiEdit onClick={() => setEdit({id: id , task: task, completed: completed})} size={20} />
+        <button className='pointer hover:text-red-600 duration-300' onClick={() => toggleRemove(id)} ><TiTimes size={23} /></button>
+        <button className='pointer hover:text-blue-600 duration-300' onClick={() => setEdit({id: id , task: task, completed: completed})}><TiEdit size={20} /></button>
       </div>
     </div>
   )

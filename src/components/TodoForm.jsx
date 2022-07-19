@@ -20,7 +20,7 @@ export default function TodoForm({onSubmit,edit}) {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="flex items-center border border-blue-500 rounded-md overflow-hidden shadow-md">
+      <form onSubmit={handleSubmit} className="flex border border-blue-700 rounded-md overflow-hidden shadow-md">
         { edit ? (
           <>
             <input 
@@ -28,10 +28,10 @@ export default function TodoForm({onSubmit,edit}) {
             name="task" 
             value={input}
             onChange={handleChange}
-            className="flex-1 px-3 py-2 outline-none"
+            className="w-full py-3 px-2 outline-none"
             autoComplete='off'
             />
-            <button className="px-3 py-3 text-sm font-semibold bg-blue-700 text-gray-100">Update Task</button>
+            <button className="px-3 text-sm font-semibold bg-blue-700 hover:bg-blue-600 text-gray-100">Update&nbsp;Task</button>
           </>
         ) : (
           <>
@@ -40,9 +40,9 @@ export default function TodoForm({onSubmit,edit}) {
             name="task" 
             value={input}
             onChange={handleChange}
-            className="flex-1 px-3 py-2 outline-none"
+            className="w-full py-3 px-2 outline-none"
             />
-          <button className="px-3 py-3 text-sm font-semibold bg-blue-700 text-gray-100">Add Task</button>
+            <button className="px-3 text-sm font-semibold bg-blue-700 hover:bg-blue-600 text-gray-100">Add&nbsp;Task</button>
           </>
         )
           
