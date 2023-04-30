@@ -48,7 +48,7 @@ export default function TodoList({
         </button>
         <button
           className="pointer hover:text-blue-600 duration-300"
-          onClick={() => setEdit({ id: id, task: task, completed: completed })}
+          onClick={() => setEdit({ ...todo })}
         >
           <TiEdit size={20} />
         </button>

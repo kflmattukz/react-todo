@@ -2,13 +2,12 @@ import React, { useState } from "react";
 
 export default function TodoForm({ onSubmit, edit }) {
   const [input, setInput] = useState(edit ? edit.task : "");
-
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit({
       id: edit ? edit.id : Math.floor(Math.random() * 1000),
       task: input,
-      completed: false,
+      completed: edit ? edit.completed : false,
     });
 
     setInput("");
