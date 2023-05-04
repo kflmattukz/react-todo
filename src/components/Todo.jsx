@@ -2,38 +2,52 @@ import React, { useState } from "react";
 import TodoForm from "./TodoForm";
 import TodoInfo from "./TodoInfo";
 import TodoList from "./TodoList";
+import { TiUploadOutline } from "react-icons/ti";
 
 export default function Todo() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(
+    JSON.parse(localStorage.getItem("todos")) || []
+  );
 
   const addTodo = (todo) => {
     if (!todo.task && /^\s*$/.test(todo.task)) {
       return;
     }
-    setTodos((prevTodo) => [todo, ...prevTodo]);
+    setTodos((prevTodo) => {
+      localStorage.setItem("todos", JSON.stringify([todo, ...prevTodo]));
+      return [todo, ...prevTodo];
+    });
   };
 
   const completeTodo = (todoId, completed) => {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) => {
+    setTodos((prevTodos) => {
+      const update = prevTodos.map((todo) => {
         if (todo.id !== todoId) return todo;
         todo.completed = !completed;
         return todo;
-      })
-    );
+      });
+      localStorage.setItem("todos", JSON.stringify(update));
+      return update;
+    });
   };
 
   const updateTodo = (todoId, newTask) => {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) => {
+    setTodos((prevTodos) => {
+      const update = prevTodos.map((todo) => {
         if (todo.id !== todoId) return todo;
         return newTask;
-      })
-    );
+      });
+      localStorage.setItem("todos", JSON.stringify(update));
+      return update;
+    });
   };
 
   const removeTodo = (todoId) => {
-    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== todoId));
+    setTodos((prevTodos) => {
+      const update = prevTodos.filter((todo) => todo.id !== todoId);
+      localStorage.setItem("todos", JSON.stringify(update));
+      return update;
+    });
   };
 
   const todosList = todos.map((todo) => {
