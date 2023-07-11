@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import TodoForm from "./TodoForm";
 import TodoInfo from "./TodoInfo";
 import TodoList from "./TodoList";
-import { TiUploadOutline } from "react-icons/ti";
 
 export default function Todo() {
   const [todos, setTodos] = useState(
@@ -10,7 +9,8 @@ export default function Todo() {
   );
 
   const addTodo = (todo) => {
-    if (!todo.task && /^\s*$/.test(todo.task)) {
+    const regex = new RegExp(/^s*$/);
+    if (!todo.task || regex.test(todo.task.trim())) {
       return;
     }
     setTodos((prevTodo) => {
